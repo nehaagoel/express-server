@@ -27,3 +27,5 @@ Some useful plugins:
 
 7. Icon Fonts: Tiny snippets for including icon fonts in your project (from a CDN) and then adding the icons themselves. The extension supports over 20 popular icon sets, including Font Awesome, Ionicons, Glyphicons, and Material Design Icons.  Fonts
 
+8. TODO Highlight: This tool marks all TODO comments in your code, making it easier to track down any unfinished business before pushing to production. By default it looks for TODO and FIXME keywords but you can add your custom expressions as well.
+
