@@ -11,15 +11,15 @@ In the modern era, software is commonly delivered as a service: called web apps,
 The twelve-factor methodology can be applied to apps written in any programming language, and which use any combination of backing services (database, queue, memory cache, etc).
 
 ## The Twelve Factors
-**I. Codebase:** One codebase tracked in revision control, many deploys
-**II. Dependencies:** Explicitly declare and isolate dependencies
-**III. Config:** Store config in the environment
-**IV. Backing services:** Treat backing services as attached resources
-**V. Build, release, run:** Strictly separate build and run stages
-**VI. Processes:** Execute the app as one or more stateless processes
-**VII. Port binding:** Export services via port binding
-**VIII. Concurrency:** Scale out via the process model
-**IX. Disposability:** Maximize robustness with fast startup and graceful shutdown
-**X. Dev/prod parity:** Keep development, staging, and production as similar as possible
-**XI. Logs:** Treat logs as event streams
-**XII. Admin processes:** Run admin/management tasks as one-off processes
+**1. Codebase:** One codebase tracked in revision control, many deploys
+**2. Dependencies:** Explicitly declare and isolate dependencies
+**3. Config:** Store config in the environment
+**4. Backing services:** Treat backing services as attached resources
+**5. Build, release, run:** Strictly separate build and run stages
+**6. Processes:** Execute the app as one or more stateless processes
+**7. Port binding:** Export services via port binding
+**8. Concurrency:** Scale out via the process model
+**9. Disposability:** Maximize robustness with fast startup and graceful shutdown
+**10. Dev/prod parity:** Keep development, staging, and production as similar as possible
+**11. Logs:** Treat logs as event streams
+**12. Admin processes:** Run admin/management tasks as one-off processes
