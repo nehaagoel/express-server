@@ -11,10 +11,17 @@ const permissions =
 function hasPermission(moduleName, role, permissionType)
 {
     let data=permissions[moduleName];
-    let x=data[permissionType];
-    return x.some(element => {if (element===role)
+    //let permission=data[permissionType];
+    if(!permissions||!data[permissionType])
+     { console.log(`${role} doesn't have permission to ${permissionType}`);
+      return false;
+    }
+    if(data[permissionType].includes( role ))
+    {
+        console.log(`${role} has permission to ${permissionType}`);
         return true;
-    else 
-    return false});
+    }
+    else
+      console.log(`${role} doesn't have permission to ${permissionType}`);
 }
-console.log(hasPermission("getUsers","trainee","read"));
+console.log(hasPermission("getUsers","trainer","write"));

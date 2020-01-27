@@ -14,8 +14,6 @@ const users =
         reviewerEmail: 'megha.r@suessive.tech',
         }
     ];
-count=0;
-count2=0;
 valid=[];
 invalid=[]; 
 function validateEmail(x)
@@ -23,7 +21,7 @@ function validateEmail(x)
    const regex =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((successive.tech))$/;
    y=regex.test(x);
 
-    if(y==true) 
+    if(y) 
         valid.push(x);
     else 
         invalid.push(x);
@@ -32,19 +30,12 @@ function validateEmail(x)
 function validateUsers(users)
 {
     users.forEach((element) => {const {traineeEmail, reviewerEmail} = element;
-        check=validateEmail(traineeEmail);
-    if(check==true) 
-        count++;
-    else 
-        count2++;
-    check1=validateEmail(reviewerEmail);
-    if(check1==true) 
-        count++;
-    else 
-        count2++; })
+     check=validateEmail(traineeEmail);
+    check1=validateEmail(reviewerEmail); 
+    })
 }
 validateUsers(users);
 console.log("valid Emails: "+ valid);
 console.log("invlaid Email: " + invalid);
-console.log("valid count: "+ count);
-console.log("invlaid count: "+ count2);   
+console.log("valid count: "+ valid.length);
+console.log("invlaid count: "+ invalid.length); 
