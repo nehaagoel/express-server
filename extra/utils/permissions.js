@@ -11,7 +11,6 @@ const permissions =
 function hasPermission(moduleName, role, permissionType)
 {
     let data=permissions[moduleName];
-    //let permission=data[permissionType];
     if(!permissions||!data[permissionType])
      { console.log(`${role} doesn't have permission to ${permissionType}`);
       return false;
