@@ -25,13 +25,14 @@ function validateEmail(x)
 function validateUsers(users)
 {
     users.forEach((element) => {const {traineeEmail, reviewerEmail} = element;
-     if(validateEmail(traineeEmail))
+     if(validateEmail(traineeEmail)&& validateEmail(reviewerEmail))
+     {
 	valid.push(traineeEmail);
-     else 
 	invalid.push(reviewerEmail);
-     if(validateEmail(reviewerEmail))
-	 valid.push(traineeEmail);
-     else 
+     }
+     else
+     {
+	 valid.push(traineeEmail); 
 	invalid.push(reviewerEmail);
     })
 }
