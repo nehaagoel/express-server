@@ -1,14 +1,5 @@
-const permissions = 
-{
-    'getUsers': {
-        all: ['head-trainer'],
-        read : ['trainee', 'trainer'],
-        write : ['trainer'],
-        delete: [],
-        }
-
-};
-function hasPermission(moduleName, role, permissionType)
+import {permissions} from "../constants";
+export default function hasPermission(moduleName, role, permissionType)
 {
     let data=permissions[moduleName];
     if(!permissions||!data[permissionType])
@@ -23,4 +14,3 @@ function hasPermission(moduleName, role, permissionType)
     else
       console.log(`${role} doesn't have permission to ${permissionType}`);
 }
-console.log(hasPermission("getUsers","trainer","write"));

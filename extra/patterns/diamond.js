@@ -1,6 +1,5 @@
-var x=Number(process.argv[2])
-diamond(x);
-function diamond(x)
+var out,i,j,k;
+export default function diamond(x)
 {
     console.log("Print diamond with rows " +x)
     if(x<2 && x>10)
