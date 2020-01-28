@@ -1,21 +1,25 @@
 {
-  "name": "express-server",
+  "name": "javascript-server",
   "version": "1.0.0",
-  "description": "different patterns",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "execute1": "node extra/patterns/diamond.js",
-    "execute2": "node extra/patterns/equilateral.js"
+    "test": "echo \"Error: no test specified\" && exit 1",  
+    "build": "npx babel-node extra"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nehaagoel/express-server.git"
+    "url": "git+https://github.com/nehaagoel/javascript-server.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nehaagoel/express-server/issues"
+    "url": "https://github.com/nehaagoel/javascript-server/issues"
   },
-  "homepage": "https://github.com/nehaagoel/express-server#readme"
+  "homepage": "https://github.com/nehaagoel/javascript-server#readme",
+  "dependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3"
+  }
 }
