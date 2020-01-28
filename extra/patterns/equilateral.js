@@ -1,5 +1,6 @@
-var out,i,j,k;
-export default function equilateral(x)
+var x=Number(process.argv[2])
+equilateral(x)
+function equilateral(x)
 {
     console.log("Print equilateral with rows " +x)
     if(x<2 && x>10)
