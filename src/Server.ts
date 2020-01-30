@@ -15,6 +15,7 @@ class Server {
         this.app.get('/health-check', (req: express.Request, res: express.Response) => {
             res.send('I am OK');
         });
+
         }
         run() {
             this.app.listen(this.config.port, ( err) => {
