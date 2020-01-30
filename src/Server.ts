@@ -12,7 +12,7 @@ class Server {
     }
 
     setupRoutes() {
-        this.app.get('health-check', (req: express.Request, res: express.Response) => {
+        this.app.get('/health-check', (req: express.Request, res: express.Response) => {
             res.send('I am OK');
         });
         }
