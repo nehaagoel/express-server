@@ -1,19 +1,29 @@
 import * as express from 'express';
 import IConfig from './config/IConfig';
+import * as bodyParser from 'body-parser';
+import { errorHandler, notFoundRoute } from './libs';
 
 class Server {
     app: express.Application;
     constructor(private config: IConfig) {
         this.app = express();
     }
-    bootstrap() {
+    bootstrap(): Server {
+        this.initbodyParser();
         this.setupRoutes();
         return this;
     }
-
-    setupRoutes() {
+    initbodyParser(): void {
+        const { app } = this;
+        this.app.use(bodyParser.urlencoded({ extended: false }));
+        this.app.use(bodyParser.json());
+    }
+    setupRoutes(): void {
+        const { app } = this;
         this.app.get('/health-check', (req: express.Request, res: express.Response) => {
             res.send('I am OK');
+            this.app.use(notFoundRoute);
+            this.app.use(errorHandler);
         });
         }
         run() {
