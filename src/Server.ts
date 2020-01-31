@@ -9,11 +9,11 @@ class Server {
         this.app = express();
     }
     bootstrap(): Server {
-        this.bodyParser();
+        this.initbodyParser();
         this.setupRoutes();
         return this;
     }
-  bodyParser(): void {
+    initbodyParser(): void {
         const { app } = this;
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(bodyParser.json());
@@ -26,7 +26,7 @@ class Server {
             this.app.use(errorHandler);
         });
         }
-        run(): Server {
+        run() {
             this.app.listen(this.config.port, ( err) => {
                 if (err) {
                     console.log(err);

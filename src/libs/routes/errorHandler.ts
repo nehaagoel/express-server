@@ -1,8 +1,9 @@
 const errorHandler = (( err, req, res, next) => {
     console.log ('Error', err);
-    res.send( { error: err.error,
-        message: err.message,
-        status: err.status,
+    const { error, message, status } = err;
+    res.send( { error: error || 'Not Found',
+        message: message || 'Error',
+        status: status || 500,
         timestamp: new Date()
         });
 });
