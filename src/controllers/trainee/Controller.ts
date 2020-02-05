@@ -20,7 +20,7 @@ class TraineeController {
     });
     }
     update = (req: Request, res: Response) => {
-        console.log('UPDATE TRAINEE');
+        console.log('UPDATE TRAINEE', req.body);
         res.send({
             status: 'OK',
             message: 'Trainee Updated Successfully',
