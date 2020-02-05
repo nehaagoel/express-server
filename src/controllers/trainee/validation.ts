@@ -28,11 +28,6 @@ export default {
             number: true,
             in: ['query'],
             errorMessage: 'Skip is invalid',
-            custom: (reqMethod: any, req: Request): void => {
-                    if (req[reqMethod].skip === undefined) {
-                    req[reqMethod].skip = '0';
-                }
-            }
         },
         limit: {
             required: false,
@@ -41,11 +36,6 @@ export default {
             number: true,
             in: ['query'],
             errorMessage: 'Limit is invalid',
-            custom: (reqMethod: any, req: Request): void => {
-                if (req[reqMethod].limit === undefined) {
-                    req[reqMethod].limit = '10';
-                }
-            }
         }
     },
     update: {

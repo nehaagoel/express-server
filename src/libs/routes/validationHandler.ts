@@ -42,6 +42,10 @@ export default (config) => (req: Request, res: Response, next: NextFunction) => 
                             || !(validationRules.default === '10' && req.body[validateKey] === 'limit'))
                            next({ error: 'Error has Occured', message: validationRules.errorMessage , timestamp: new Date(), status: 500});
                     }
+                    if (Object.keys(validationRules).includes('custom')) {
+                        if (!validationRules.custom(req.body))
+                            next({ error: 'Error has Occured', message: validationRules.errorMessage , timestamp: new Date(), status: 500});
+                            }
         }
     }
   });
