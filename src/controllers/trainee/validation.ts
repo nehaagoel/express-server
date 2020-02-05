@@ -1,4 +1,3 @@
-import { NextFunction } from 'express';
 export default {
     create: {
         id: {
