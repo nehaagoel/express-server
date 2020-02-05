@@ -14,7 +14,7 @@ export default {
         },
         name: {
             required: true,
-            regex: '^[a-zA-Z0-9\-]+$',
+            regex: /^[a-zA-Z\-]+$/,
             in: ['body'],
             errorMessage: 'Name is required',
         }
