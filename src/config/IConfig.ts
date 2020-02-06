@@ -1,3 +1,5 @@
 export default interface IConfig {
     port: string;
-    env: string; }
+    env: string;
+    secretKey: string;
+}
