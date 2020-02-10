@@ -11,7 +11,4 @@ router.route('/')
 .post(authmiddleware('getUsers', 'read'), validationHandler(config.create), TraineeController.create)
 .delete(authmiddleware('getUsers', 'read'), validationHandler(config.delete), TraineeController.delete)
 .put(authmiddleware('getUsers', 'read'), validationHandler(config.update), TraineeController.update);
-
-// router.route('/list')
-// .get(TraineeController.list);
 export default router;
