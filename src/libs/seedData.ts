@@ -3,14 +3,25 @@ const userRepository = new UserRepository();
 export default () => {
     const user = {
         id: String,
-        name: 'Head Trainer',
+        name: 'Trainee',
         address: 'Noida',
-        email: 'vinay@successive.tech',
-        dob: new Date('27/12/1993'),
-        mobileNumber: 9875312578,
-        hobbies: ['String']
+        email: 'neha.goel@successive.tech',
+        dob: new Date('02/08/1998'),
+        mobileNumber: 9958839783,
+        hobbies: ['Touring']
     };
-    userRepository.create(user).then((res) => {
-        console.log('User Created Successfully', res);
-    }).catch((err) => console.error(err));
+    userRepository.count().then((count: number): any => {
+
+        console.log('Count of Users is', count );
+
+        if (!count) {
+            return userRepository.create(user)
+            .then((res) => {
+                console.log('User Seeded Successfully', res);
+            });
+        } else {
+            console.log('User is Already Seeded');
+        }
+    }).catch((err: any) =>  console.error(err));
+
 };

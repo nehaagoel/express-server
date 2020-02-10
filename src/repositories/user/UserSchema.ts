@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 class UserSchema extends mongoose.Schema {
-    constructor(options) {
+    constructor(options: any) {
         const userSchema = {
             id: String,
             name: String,

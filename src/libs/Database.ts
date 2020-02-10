@@ -23,8 +23,8 @@ class Database {
             console.log('Database is disconnected');
             resolve();
         });
-       // console.log('Database is disconnected');
     });
-}
+    return promise;
+  }
 }
 export default Database;
