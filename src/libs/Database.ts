@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import seedData from './seedData';
 class Database {
     static open = ( mongoUri: string ) => {
         const promise = new Promise((resolve, reject) => {
@@ -6,15 +7,24 @@ class Database {
                 if (err) {
                     reject(err);
                 }
+                seedData();
                 console.log('Database is connected at: ', mongoUri);
                 resolve();
             });
         });
         return promise;
     }
-    static disconnect = () => {
-        mongoose.connection.close();
-        console.log('Database is disconnected');
-    }
+    static disconnect = (mongoUri: string) => {
+        const promise = new Promise((resolve, reject) => {
+        mongoose.connection.close((err) => {
+            if (err) {
+                reject(err);
+            }
+            console.log('Database is disconnected');
+            resolve();
+        });
+    });
+    return promise;
+  }
 }
 export default Database;

@@ -18,7 +18,7 @@ class Server {
     initbodyParser(): void {
         const { app } = this;
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use(bodyParser.json());
+
     }
     setupRoutes(): void {
         const { app } = this;
