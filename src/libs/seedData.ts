@@ -8,6 +8,7 @@ export default () => {
         email: 'neha.goel@successive.tech',
         dob: new Date('02/08/1998'),
         mobileNumber: 9958839783,
+        role: 'read',
         hobbies: ['Touring']
     };
     userRepository.count().then((count: number): any => {

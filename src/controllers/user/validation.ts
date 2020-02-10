@@ -4,10 +4,7 @@ const validation = {
             required: true,
             string: true,
             in: ['body'],
-            custom: (value: any) => {
-               console.log('Value', value);
-               throw { error: 'Error Occured', message: 'Message' };
-        } },
+    },
         name: {
            required: true,
            regex: /^[a-zA-Z]+(([,. -][a-zA-Z ])?[a-zA-Z]*)*$/,
