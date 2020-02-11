@@ -1,15 +1,18 @@
-import { Router } from 'express';
+import { Response, Router } from 'express';
 import UserController from './Controller';
-import validationHandler from '../../libs/routes/validationHandler';
 import authmiddleware from '../../libs/routes/authMiddleWare';
-import config from './validation';
+import { IRequest } from '../../libs/interface';
 
 const UserRouter = Router();
 
 UserRouter.route('/')
-.get(authmiddleware('getUsers', 'read'), validationHandler(config.get), UserController.list)
-.post(authmiddleware('getUsers', 'read'), validationHandler(config.create), UserController.create)
-.put(authmiddleware('getUsers', 'read'), validationHandler(config.update), UserController.update);
+.get(authmiddleware('Users', 'all'), UserController.list)
+.post(authmiddleware('Users', 'all'), UserController.create)
+.put(authmiddleware('Users', 'all'),  UserController.update);
 UserRouter.route('/:id')
-.delete(authmiddleware('getUsers', 'read'), validationHandler(config.delete), UserController.delete) ;
+.delete(authmiddleware('Users', 'all'), UserController.delete) ;
+UserRouter.route('/me')
+.get(authmiddleware('Users', 'all'), (req: IRequest, res: Response) => {
+    res.send(req.user);
+});
 export default UserRouter;

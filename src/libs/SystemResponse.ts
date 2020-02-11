@@ -1,5 +1,5 @@
 class SystemResponse {
-    static success = (res, data, message = 'Success') => {
+    static success = (res: any , data: any, message: any = 'Success') => {
         return res.status(200).send({
             status: 'OKAY',
             message,

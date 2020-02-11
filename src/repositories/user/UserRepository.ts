@@ -6,9 +6,19 @@ class UserRepository {
             constructor() {
         this.userModel = userModel;
     }
+    getObjectId() {
+        return String( mongoose.Types.ObjectId());
+    }
      create = (data: any) => {
-         return this.userModel.create(data);
-     }
+         const userData = {
+             _id: this.getObjectId(),
+            ...data,
+            };
+         return this.userModel.create(userData);
+     };
+     findOne = (query: any): any => {
+         return this.userModel.findOne(query);
+     };
      count = () => {
          return this.userModel.countDocuments();
      }
