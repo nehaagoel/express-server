@@ -1,38 +1,41 @@
 import * as jwt from 'jsonwebtoken';
 import configuration from '../../config/configuration';
 import hasPermission from '../permissions';
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
+import UserRepository from '../../repositories/user/UserRepository';
+import { IRequest } from '../interface';
 
-export default (moduleName: any, permissionType: any) => (req: Request, res: Response, next: NextFunction) => {
+const userRepository = new UserRepository();
+const Error = (next: NextFunction) => {
+    return next({
+        status: 401,
+        error: 'Unauthorized Access',
+        message: 'Unauthorized Access'});
+};
+
+export default (moduleName: any, permissionType: any) => (req: IRequest, res: Response, next: NextFunction) => {
     console.log(' AUTHMIDDLEWARE ', moduleName, permissionType);
-    try {
-
         const token = req.headers.authorization;
         const { secretKey } = configuration;
         const decodedUser = jwt.verify(token, secretKey);
 
         if (!decodedUser) {
-            return next({
-                staus: 403,
-                error: 'Unauthorized Access',
-                message: 'Unauthorized Access'
-            });
+            Error(next);
         }
+        const { id, email } = decodedUser;
+        userRepository.findOne({_id: id, email })
+        .then( result => {
+            if (!result) {
+                Error(next);
+            }
+            req.user = result;
         const role: string = decodedUser.role;
         if (!hasPermission(moduleName, role, permissionType)) {
-            return next({
-                staus: 403,
-                error: 'Unauthorized Access',
-                message: 'Unauthorized Access'
-            });
+            Error(next);
         }
         next();
-    }
-    catch (error) {
-        return next({
-            staus: 403,
-            error: 'Unauthorized Access',
-            message: error.message
-        });
-    }
+    })
+    .catch ((error: any) => {
+        Error(next);
+    });
 };

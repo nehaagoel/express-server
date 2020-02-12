@@ -1,3 +1,5 @@
+import IUserModel from '../repositories/user/IUserModel';
+import { Request } from 'express';
 interface IAuth {
     all: string[];
     read: string[];
@@ -6,5 +8,9 @@ interface IAuth {
 }
 interface Iperm {
     getUsers: IAuth;
+    Users: IAuth;
 }
-export default Iperm;
+interface IRequest extends Request {
+    user: IUserModel;
+}
+export { Iperm, IRequest };
