@@ -5,6 +5,7 @@ export default interface IUserModel extends IVersionDocument {
             name: string;
             address: string;
             email: string;
+            password: string;
             dob: Date;
             mobileNumber: number;
             role: string;

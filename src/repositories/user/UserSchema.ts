@@ -7,6 +7,7 @@ class UserSchema extends VersionableSchema {
             name: String,
             address: String,
             email: String,
+            password: String,
             dob: Date,
             mobileNumber: Number,
             role: String,
