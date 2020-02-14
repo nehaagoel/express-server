@@ -44,48 +44,56 @@ class UserController {
             next({ error: err.message });
         }
     }
-    create = (req: Request, res: Response) => {
+    create = async (req: Request, res: Response) => {
         console.log('::CREATE USER:::::');
-        const userData = req.body;
-        this.userRepository.create(userData)
-            .then((user: any) => {
+        try {
+            const userData = req.body;
+            const user = await this.userRepository.create(userData);
+            if (user) {
                 return SystemResponse.success(res, user, 'User Added Successfully');
-            })
-            .catch((error: any) => {
+            }
+        }
+        catch (error) {
                 return SystemResponse.error(res, error, 'User Added UnSuccessfull');
-            });
+            }
     }
-    update = (req: Request, res: Response) => {
+    update = async (req: Request, res: Response) => {
         console.log('::UPDATE USER:::::');
-        const userData = req.body;
-        this.userRepository.update(userData.id, userData)
-            .then((user: any) => {
+        try {
+            const userData = req.body;
+        const user = await this.userRepository.update(userData.id, userData);
+            if (user) {
                 return SystemResponse.success(res, user, 'User Updated Successfully');
-            })
-            .catch((error: any) => {
+            }
+        }
+        catch (error) {
                 return SystemResponse.error(res, error, 'User Updated UnSuccessfull');
-            });
+            }
     }
-    list = (req: Request, res: Response) => {
+    list = async (req: Request, res: Response) => {
         console.log('::USER LIST:::::');
-        this.userRepository.list()
-            .then((user: any) => {
+        try {
+            const user = await this.userRepository.list();
+            if (user) {
                 return SystemResponse.success(res, user, 'List Of Users');
-            })
-            .catch((error: any) => {
+            }
+        }
+        catch (error) {
                 return SystemResponse.error(res, error, 'No List Exist');
-            });
+            }
     }
-    delete = (req: Request, res: Response) => {
+    delete = async (req: Request, res: Response) => {
         console.log('::Delete USER:::::');
-        const userData = req.params;
-        this.userRepository.delete(userData.id)
-            .then((user: any) => {
+        try {
+            const userData = req.params;
+            const user = await this.userRepository.delete(userData.id);
+            if (user) {
                 return SystemResponse.success(res, user, 'User Deleted Successfully');
-            })
-            .catch((error: any) => {
+            }
+        }
+        catch (error) {
                 return SystemResponse.error(res, error, 'User Deleted UnSuccessfull');
-            });
+            }
     }
 }
 export default UserController.getInstance();
