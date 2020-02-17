@@ -29,7 +29,7 @@ export default (moduleName: any, permissionType: any) => (req: IRequest, res: Re
                 Error(next);
             }
             req.user = result;
-        const role: string = decodedUser.role;
+        const role: string = req.user.role;
         if (!hasPermission(moduleName, role, permissionType)) {
             Error(next);
         }
