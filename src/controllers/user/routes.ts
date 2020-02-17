@@ -18,6 +18,6 @@ UserRouter.route('/me')
     res.send(req.user);
 });
 UserRouter.route('/login')
-.post(authmiddleware('Users', 'all'), UserController.login);
+.post(UserController.login);
 
 export default UserRouter;
