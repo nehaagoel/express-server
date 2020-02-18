@@ -14,6 +14,9 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
      count = () => {
         return this.modelType.countDocuments();
     }
+    countTrainee = () => {
+        return this.modelType.countDocuments({ role: 'trainee', deletedAt: {$exists: undefined}});
+    }
      async create(options): Promise<D> {
         const id = this.generateObjectId();
         return this.modelType.create({
@@ -42,8 +45,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         });
         return data;
     }
-     async list() {
-        return this.modelType.find();
+     async list(userRole, sort, skip, limit): Promise<D[]> {
+        return this.modelType.find({ role: userRole}).sort(sort).skip(Number(skip)).limit(Number(limit));
     }
      async delete(id: string) {
         return this.updatedData(id);

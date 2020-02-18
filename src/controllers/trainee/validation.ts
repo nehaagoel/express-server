@@ -1,16 +1,29 @@
 export default {
     create: {
-        id: {
-            required: true,
-            string: true,
-            in: ['body'],
-            errorMessage: 'ID is required'
-        },
         name: {
             required: true,
             regex: /^[a-zA-Z0-9\-]+$/,
             in: ['body'],
             errorMessage: 'Name is required',
+        },
+        address: {
+            required: true,
+            in: ['body'],
+            string: true,
+            errorMessage: 'Address is required',
+        },
+        email: {
+            required: true,
+            string: true,
+            regex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((successive.tech))$/,
+            in: ['body'],
+            errorMessage: 'Email is required',
+        },
+        mobileNumber: {
+            required: true,
+            number: true,
+            in: ['body'],
+            errorMessage: 'Number is required',
         }
     },
     delete: {

@@ -44,56 +44,5 @@ class UserController {
             next({ error: err.message });
         }
     }
-    create = async (req: Request, res: Response) => {
-        console.log('::CREATE USER:::::');
-        try {
-            const userData = req.body;
-            const user = await this.userRepository.create(userData);
-            if (user) {
-                return SystemResponse.success(res, user, 'User Added Successfully');
-            }
-        }
-        catch (error) {
-                return SystemResponse.error(res, error, 'User Added UnSuccessfull');
-            }
-    }
-    update = async (req: Request, res: Response) => {
-        console.log('::UPDATE USER:::::');
-        try {
-            const userData = req.body;
-        const user = await this.userRepository.update(userData.id, userData);
-            if (user) {
-                return SystemResponse.success(res, user, 'User Updated Successfully');
-            }
-        }
-        catch (error) {
-                return SystemResponse.error(res, error, 'User Updated UnSuccessfull');
-            }
-    }
-    list = async (req: Request, res: Response) => {
-        console.log('::USER LIST:::::');
-        try {
-            const user = await this.userRepository.list();
-            if (user) {
-                return SystemResponse.success(res, user, 'List Of Users');
-            }
-        }
-        catch (error) {
-                return SystemResponse.error(res, error, 'No List Exist');
-            }
-    }
-    delete = async (req: Request, res: Response) => {
-        console.log('::Delete USER:::::');
-        try {
-            const userData = req.params;
-            const user = await this.userRepository.delete(userData.id);
-            if (user) {
-                return SystemResponse.success(res, user, 'User Deleted Successfully');
-            }
-        }
-        catch (error) {
-                return SystemResponse.error(res, error, 'User Deleted UnSuccessfull');
-            }
-    }
 }
 export default UserController.getInstance();

@@ -7,12 +7,6 @@ import config from './validation';
 
 const UserRouter = Router();
 
-UserRouter.route('/')
-.get(authmiddleware('Users', 'all'), validationHandler(config.get), UserController.list)
-.post(authmiddleware('Users', 'all'), validationHandler(config.create), UserController.create)
-.put(authmiddleware('Users', 'all'), validationHandler(config.update), UserController.update);
-UserRouter.route('/:id')
-.delete(authmiddleware('Users', 'all'), validationHandler(config.delete), UserController.delete) ;
 UserRouter.route('/me')
 .get(authmiddleware('Users', 'all'), validationHandler(config.get), (req: IRequest, res: Response) => {
     res.send(req.user);
