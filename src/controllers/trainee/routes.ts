@@ -7,8 +7,9 @@ import config from './validation';
 const router = Router();
 
 router.route('/')
-.get(authmiddleware('getUsers', 'read'), validationHandler(config.get), TraineeController.list)
+.get(authmiddleware('getUsers', 'all'), validationHandler(config.get), TraineeController.list)
 .post(authmiddleware('getUsers', 'read'), validationHandler(config.create), TraineeController.create)
-.delete(authmiddleware('getUsers', 'read'), validationHandler(config.delete), TraineeController.delete)
-.put(authmiddleware('getUsers', 'read'), validationHandler(config.update), TraineeController.update);
+.put(authmiddleware('getUsers', 'all'), validationHandler(config.update), TraineeController.update);
+router.route('/:id')
+.delete(authmiddleware('getUsers', 'all'), validationHandler(config.delete), TraineeController.delete);
 export default router;
