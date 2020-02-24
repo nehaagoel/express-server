@@ -27,7 +27,8 @@ class TraineeController {
         console.log('::::UPDATE TRAINEE:::::');
         try {
             const traineeData = req.body;
-        const trainee = await this.userRepository.update1(traineeData.id, traineeData);
+            const traineeId = traineeData.id;
+        const trainee = await this.userRepository.update1(traineeData.id, traineeData.dataToUpdate, traineeId);
                 return SystemResponse.success(res, trainee, 'Trainee Updated Successfully');
         }
         catch (error) {
@@ -44,9 +45,16 @@ class TraineeController {
             else if (req.query.sort === 'name') {
                 sort = {name: 1 };
             }
-            else
-            sort = { updatedAt: 1 };
-            const trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit);
+            else {
+            sort = { updatedAt: 1 }; }
+            let searchBy = {};
+            if (req.query.searchEmail !== undefined) {
+                searchBy = { ...searchBy, email: req.query.searchEmail};
+            }
+            else if (req.query.searchName !== undefined) {
+                searchBy = { ...searchBy, name: req.query.searchName};
+            }
+            const trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, searchBy);
             const countTrainee = await this.userRepository.countTrainee();
             console.log('count is ' , countTrainee);
             const data = {
@@ -63,7 +71,8 @@ class TraineeController {
         console.log('::::Delete TRAINEE:::::');
         try {
             const traineeData = req.params;
-            const trainee = await this.userRepository.delete1(traineeData.id);
+            const traineeId = traineeData.id;
+            const trainee = await this.userRepository.delete1(traineeData.id, traineeId);
                 return SystemResponse.success(res, trainee, 'Trainee Deleted Successfully');
         }
         catch (error) {

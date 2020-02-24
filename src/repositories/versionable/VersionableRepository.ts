@@ -27,28 +27,28 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
             createdBy: id
         });
     }
-    async update(id, options): Promise<D> {
+    async update(id, options, traineeId): Promise<D> {
         const Id = this.generateObjectId();
-        await this.updatedData(id);
+        await this.updatedData(id, traineeId);
         return this.modelType.create({
             ...options,
             _id: Id,
             originalId: id,
             updatedAt: Date.now(),
-            updatedBy: id
+            updatedBy: traineeId
         });
     }
-    async updatedData(id): Promise<D> {
-        const data = await this.modelType.findByIdAndUpdate(id, {
+    async updatedData(id, traineeId): Promise<D> {
+        const data = await this.modelType.findByIdAndUpdate(id,  {
             deletedAt: Date.now(),
             deletedBy: id
         });
         return data;
     }
-     async list(userRole, sort, skip, limit): Promise<D[]> {
-        return this.modelType.find({ role: userRole}).sort(sort).skip(Number(skip)).limit(Number(limit));
+     async list(userRole, sort, skip, limit, searchBy): Promise<D[]> {
+        return this.modelType.find(searchBy).find({ role: userRole}).sort(sort).skip(Number(skip)).limit(Number(limit));
     }
-     async delete(id: string) {
-        return this.updatedData(id);
+     async delete(id: string, traineeId) {
+        return this.updatedData(id, traineeId);
     }
 }

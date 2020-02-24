@@ -12,15 +12,15 @@ class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IU
      count1 = () => {
          return super.count();
      }
-     update1 = (id: string, data: any) => {
-        return super.update(id, data);
+     update1 = (id: string, data: any, traineeId) => {
+        return super.update(id, data, traineeId);
      }
-     list1 = (userRole, sort, skip, limit) => {
-        return super.list(userRole, sort, skip, limit);
+     list1 = (userRole, sort, skip, limit, searchBy) => {
+        return super.list(userRole, sort, skip, limit, searchBy);
      }
-     delete1 = (id: string) => {
+     delete1 = (id: string, traineeId) => {
         if (id !== undefined) {
-            return super.delete(id);
+           return super.delete(id, traineeId);
            } else {
                console.log('Please enter Id');
             }
