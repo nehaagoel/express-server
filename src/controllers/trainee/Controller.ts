@@ -38,6 +38,7 @@ class TraineeController {
     list = async (req: Request, res: Response) => {
         console.log(':::TRAINEE LIST:::::');
         try {
+            let trainee;
             let sort: any;
             if (req.query.sort === 'email') {
                 sort = {email: 1 };
@@ -45,16 +46,17 @@ class TraineeController {
             else if (req.query.sort === 'name') {
                 sort = {name: 1 };
             }
+            else
+            sort = { updatedAt: 1 };
+            let search: any;
+            if (req.query.searchBy !== undefined) {
+                search = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, { name: {$regex: req.query.searchBy.toLowerCase()}});
+                const list = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, { email: { $regex: req.query.searchBy.toLowerCase()}});
+                trainee = { ...search, ...list};
+            }
             else {
-            sort = { updatedAt: 1 }; }
-            let searchBy = {};
-            if (req.query.searchEmail !== undefined) {
-                searchBy = { ...searchBy, email: req.query.searchEmail};
+                trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, {});
             }
-            else if (req.query.searchName !== undefined) {
-                searchBy = { ...searchBy, name: req.query.searchName};
-            }
-            const trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, searchBy);
             const countTrainee = await this.userRepository.countTrainee();
             console.log('count is ' , countTrainee);
             const data = {

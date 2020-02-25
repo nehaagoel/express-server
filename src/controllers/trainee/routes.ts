@@ -22,16 +22,13 @@ const router = Router();
  *              example: neha
  *          password:
  *              type: string
- *              example: training@123
+ *              example: train@12
  *          mobileNumber:
  *              type: number
- *              example: "9973793621"
+ *              example: 9973793621
  *          address:
  *              type: string
  *              example: Noida
- *          dob:
- *              type: Date
- *              example: 16/11/1998
  *          role:
  *               type: string
  *               example: trainee
@@ -52,7 +49,7 @@ const router = Router();
  *              example: Nehaa
  *          mobileNumber:
  *              type: number
- *              example: "9975135785"
+ *              example: 9975135785
  *          address:
  *              type: string
  *              example: Delhi
@@ -122,11 +119,6 @@ router.route('/')
  *         in: query
  *         required: false
  *         type: string
- *       - name: order
- *         description: order for sorting 1 or -1
- *         in: query
- *         required: false
- *         type: number
  *     responses:
  *       200:
  *         description: Trainee List
@@ -172,7 +164,7 @@ router.route('/')
  *       200:
  *         description: User Created Successfully
  *         schema:
- *              allOf:
+ *              oneOf:
  *              properties:
  *                  status:
  *                      example: Okay
@@ -211,7 +203,7 @@ router.route('/')
  *         required: true
  *         type: object
  *         schema:
- *          allOf:
+ *          oneOf:
  *          properties:
  *              id:
  *                  example: 5e4e6e93c095d84d34045a30
@@ -223,7 +215,7 @@ router.route('/')
  *       200:
  *         description: User Updated Successfully
  *         schema:
- *              allOf:
+ *              oneOf:
  *              properties:
  *                  status:
  *                      example: Okay
@@ -263,7 +255,7 @@ router.route('/:id')
  *       200:
  *         description: Data deleted
  *         schema:
- *              allOf:
+ *              oneOf:
  *              properties:
  *                  status:
  *                      example: Ok

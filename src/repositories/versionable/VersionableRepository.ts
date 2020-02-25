@@ -46,7 +46,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         return data;
     }
      async list(userRole, sort, skip, limit, searchBy): Promise<D[]> {
-        return this.modelType.find(searchBy).find({ role: userRole}).sort(sort).skip(Number(skip)).limit(Number(limit));
+        return this.modelType.find({ role: userRole, deletedAt: undefined, ...searchBy}).sort(sort).skip(Number(skip)).limit(Number(limit));
     }
      async delete(id: string, traineeId) {
         return this.updatedData(id, traineeId);
