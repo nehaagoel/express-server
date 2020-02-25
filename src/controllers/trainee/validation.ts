@@ -44,7 +44,6 @@ export default {
         limit: {
             required: false,
             default: 10,
-            regex: /^[0-9]*$/,
             number: true,
             in: ['query'],
             errorMessage: 'Limit is invalid',
@@ -61,12 +60,15 @@ export default {
             in: ['body'],
             required: true,
             isObject: true,
-            custom: (dataToUpdate) => {
-                    console.log('Value', dataToUpdate);
-                    throw {
-                        error: 'Error has Occured',
-                        message: 'Message'
-                    };
+            errorMessage: 'Data is invalid',
+            custom: (value: any) => {
+                    console.log('Value', value);
+                    if (typeof value !== 'object') {
+                        return true;
+                    }
+                    else {
+                    return false;
+                    }
                 }
             },
         }

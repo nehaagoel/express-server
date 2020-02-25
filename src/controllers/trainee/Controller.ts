@@ -27,7 +27,8 @@ class TraineeController {
         console.log('::::UPDATE TRAINEE:::::');
         try {
             const traineeData = req.body;
-        const trainee = await this.userRepository.update1(traineeData.id, traineeData);
+            const traineeId = traineeData.id;
+        const trainee = await this.userRepository.update1(traineeData.id, traineeData.dataToUpdate, traineeId);
                 return SystemResponse.success(res, trainee, 'Trainee Updated Successfully');
         }
         catch (error) {
@@ -37,6 +38,7 @@ class TraineeController {
     list = async (req: Request, res: Response) => {
         console.log(':::TRAINEE LIST:::::');
         try {
+            let trainee;
             let sort: any;
             if (req.query.sort === 'email') {
                 sort = {email: 1 };
@@ -46,7 +48,15 @@ class TraineeController {
             }
             else
             sort = { updatedAt: 1 };
-            const trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit);
+            let search: any;
+            if (req.query.searchBy !== undefined) {
+                search = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, { name: {$regex: req.query.searchBy.toLowerCase()}});
+                const list = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, { email: { $regex: req.query.searchBy.toLowerCase()}});
+                trainee = { ...search, ...list};
+            }
+            else {
+                trainee = await this.userRepository.list1('trainee', sort, req.query.skip, req.query.limit, {});
+            }
             const countTrainee = await this.userRepository.countTrainee();
             console.log('count is ' , countTrainee);
             const data = {
@@ -63,7 +73,8 @@ class TraineeController {
         console.log('::::Delete TRAINEE:::::');
         try {
             const traineeData = req.params;
-            const trainee = await this.userRepository.delete1(traineeData.id);
+            const traineeId = traineeData.id;
+            const trainee = await this.userRepository.delete1(traineeData.id, traineeId);
                 return SystemResponse.success(res, trainee, 'Trainee Deleted Successfully');
         }
         catch (error) {

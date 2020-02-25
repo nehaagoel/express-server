@@ -23,7 +23,7 @@ export default (config) => (req: Request, res: Response, next: NextFunction) => 
                return next({ error: 'Error has Occured', message: config[key].errorMessage , timestamp: new Date(), status: 500});
             }
             else {
-                next({ error: 'Error has Occured', message: config[key].errorMessage , timestamp: new Date(), status: 500});
+            console.log('valid data');
             }
         }
     });
