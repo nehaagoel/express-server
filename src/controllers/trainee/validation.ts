@@ -44,7 +44,6 @@ export default {
         limit: {
             required: false,
             default: 10,
-            regex: /^[0-9]*$/,
             number: true,
             in: ['query'],
             errorMessage: 'Limit is invalid',
